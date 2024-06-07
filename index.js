@@ -6,7 +6,7 @@ const fs = require('fs');
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require("@google/generative-ai");
 
 const app = express();
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ storage: multer.memoryStorage() });
 const MODEL_NAME = "gemini-1.5-pro";
 const API_KEY = process.env.GOOGLE_API_KEY;
 
@@ -18,19 +18,19 @@ app.get('/', (req, res) => {
 });
 
 app.post('/upload', upload.single('image'), async (req, res) => {
-    const imagePath = req.file ? req.file.path : null;
-    if (!imagePath) {
+    const imageBuffer = req.file ? req.file.buffer : null;
+    if (!imageBuffer) {
         return res.status(400).json({ error: 'No image file provided' });
     }
 
     try {
-        const carInfoJson = await getCarInfo(imagePath);
+        const carInfoJson = await getCarInfo(imageBuffer);
         console.log('Server response:', carInfoJson);
         const carInfo = JSON.parse(carInfoJson);
         if (carInfo.error) {
             res.status(400).json({ error: carInfo.error });
         } else {
-            carInfo.imageBase64 = fs.readFileSync(imagePath, 'base64');
+            carInfo.imageBase64 = imageBuffer.toString('base64');
             res.json({ carInfo });
         }
     } catch (error) {
@@ -41,14 +41,10 @@ app.post('/upload', upload.single('image'), async (req, res) => {
         } else {
             res.status(500).json({ error: 'An unexpected error occurred on the server.' });
         }
-    } finally {
-        if (imagePath) {
-            fs.unlinkSync(imagePath);
-        }
     }
 });
 
-const getCarInfo = async (imagePath) => {
+const getCarInfo = async (imageBuffer) => {
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
@@ -97,7 +93,7 @@ const getCarInfo = async (imagePath) => {
         {
             inlineData: {
                 mimeType: "image/jpeg",
-                data: Buffer.from(fs.readFileSync(imagePath)).toString("base64")
+                data: imageBuffer.toString("base64")
             }
         },
     ];
