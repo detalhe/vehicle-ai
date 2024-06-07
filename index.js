@@ -11,7 +11,9 @@ const MODEL_NAME = "gemini-1.5-pro";
 const API_KEY = process.env.GOOGLE_API_KEY;
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.set('views', `${__dirname}/views`);
+app.use(express.static(`${__dirname}/public`));
+
 
 app.get('/', (req, res) => {
     res.render('index', { carInfo: null });
