@@ -85,7 +85,9 @@ runButton.addEventListener("click", function (event) {
                     carYear.textContent = data.carInfo.vehicle.year;
 
                     // Update car make logo
-                    const logoUrl = `https://raw.githubusercontent.com/dangnelson/car-makes-icons/2a7f574ce813e1eeddcca955c87847bc5baa28b6/svgs/${formatCarMakeForLogo(make)}.svg`;
+                    const logoUrl = `https://raw.githubusercontent.com/dangnelson/car-makes-icons/2a7f574ce813e1eeddcca955c87847bc5baa28b6/svgs/${formatCarMakeForLogo(
+                        make
+                    )}.svg`;
                     const logoExists = await checkLogoExists(logoUrl);
                     if (logoExists) {
                         carMakeLogo.src = logoUrl;
@@ -107,7 +109,6 @@ runButton.addEventListener("click", function (event) {
                 errorMessage.textContent = error.message; // Display error message
                 errorMessage.style.display = "block"; // Show error message
                 resetUploadForm();
-                resetCarInfo(); // Reset car info fields
                 scrollToDetails();
             });
     }
@@ -124,5 +125,12 @@ function resetUploadForm() {
 }
 
 function scrollToDetails() {
-    document.querySelector(".car-color").scrollIntoView({ behavior: "smooth" });
+    const element = document.querySelector(".car-color");
+    if (element.scrollIntoView) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+        // Fallback for older browsers
+        const top = element.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({ top, behavior: "smooth" });
+    }
 }

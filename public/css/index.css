@@ -329,8 +329,9 @@ h3 {
     width: 50px;
     height: auto;
     margin: 10px auto;
-    filter: invert(1) brightness(2); /* white */
+    filter: invert(1) brightness(2); /* Ensure the logo is white */
     transition: transform 0.3s ease;
+    text-align: center; /* Center the logo */
 }
 
 .car-make-logo:hover {
