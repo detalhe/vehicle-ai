@@ -1,6 +1,6 @@
-@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url("https://fonts.cdnfonts.com/css/sf-pro-display");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 
 * {
     padding: 0;
@@ -124,8 +124,6 @@ footer a:hover {
     color: #53ceff;
 }
 
-
-
 /* Modal */
 .modal {
     display: none;
@@ -183,7 +181,6 @@ h3 {
     cursor: pointer;
 }
 
-
 /* new things below */
 
 .upload-section {
@@ -195,7 +192,7 @@ h3 {
 }
 
 .upload-button {
-    background: linear-gradient(135deg, #53FFF1 0%, #3498db 100%);
+    background: linear-gradient(135deg, #53fff1 0%, #3498db 100%);
     color: #071111;
     font-family: Poppins;
     font-size: 16px;
@@ -204,7 +201,7 @@ h3 {
     border: none;
     cursor: pointer;
     border-radius: 8px;
-    transition: background-color 1s ease, transform 0.5s ease;  /* Increased duration for background-color */
+    transition: background-color 1s ease, transform 0.5s ease;
     display: inline-block;
     text-align: center;
     vertical-align: middle;
@@ -225,104 +222,117 @@ h3 {
     background-color: #0d0d0d;
     margin-bottom: 50px;
     flex-direction: column;
-    }
-    
-    .car-card {
+}
+
+.car-card {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     max-width: 500px;
     width: 100%;
     transition: transform 0.3s ease;
-    }
-    
-    .car-card:hover {
+}
+
+.car-card:hover {
     transform: scale(1.02);
-    }
-    
-    .car-image {
+}
+
+.car-image {
     width: 100%;
     height: auto;
     display: block;
-    }
-    
-    .car-details {
+}
+
+.car-details {
     padding: 15px;
     text-align: center;
     background-color: #121212;
     color: white;
-    }
-    
-    .car-details h2,
-    .car-details p {
+}
+
+.car-details h2,
+.car-details p {
     margin: 10px 0;
     font-family: "Poppins", sans-serif;
-    }
-    
-    .car-details h2 {
+}
+
+.car-details h2 {
     font-size: 1.5em;
     color: #3498db;
-    }
+}
 
-    .make {
-        text-transform: uppercase;
-    }
-    
-    .car-details p {
+.make {
+    text-transform: uppercase;
+}
+
+.car-details p {
     font-size: 1em;
     color: white;
-    }
-    
-    @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     .car-card {
-    max-width: 90%;
+        max-width: 90%;
     }
-    
+
     .car-details h2 {
-    font-size: 1.2em;
+        font-size: 1.2em;
     }
-    
+
     .car-details p {
-    font-size: 0.9em;
+        font-size: 0.9em;
     }
+}
+
+.file-info {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #ccc;
+    margin-top: 8px;
+}
+
+.remove-button {
+    font-family: "Poppins", sans-serif;
+    color: white;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0 10px;
+}
+
+.generating {
+    background: linear-gradient(to right, #53fff1, #3498db, #53fff1);
+    background-size: 200% 100%;
+    animation: gradient 2s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
     }
 
-    .file-info {
-        font-family: "Poppins", sans-serif;
-        display: flex; /* Ensures the container uses flexbox */
-        align-items: center; /* Centers items vertically */
-        justify-content: space-between; /* Optional: spaces out the children */
-        color: #ccc;
-        margin-top: 8px;
-    }
-    
-    .remove-button {
-        font-family: "Poppins", sans-serif;
-        color: white;
-        background: none;
-        border: none;
-        font-size: 16px;
-        cursor: pointer;
-        font-weight: 600;
-        padding: 0 10px; /* Adds padding to make the button easier to click */
+    50% {
+        background-position: 100% 50%;
     }
 
-    .generating {
-        background: linear-gradient(to right, #53FFF1, #3498db, #53FFF1);
-        background-size: 200% 100%;
-        animation: gradient 2s ease infinite;
+    100% {
+        background-position: 0% 50%;
     }
+}
 
-    @keyframes gradient {
-        0% {
-            background-position: 0% 50%;
-        }
-    
-        50% {
-            background-position: 100% 50%;
-        }
-    
-        100% {
-            background-position: 0% 50%;
-        }
-    }
+.car-make-logo {
+    display: block;
+    width: 50px;
+    height: auto;
+    margin: 10px auto;
+    filter: invert(1) brightness(2); /* white */
+    transition: transform 0.3s ease;
+}
+
+.car-make-logo:hover {
+    transform: scale(1.1);
+}
