@@ -94,12 +94,8 @@ runButton.addEventListener("click", function (event) {
                         carMakeLogo.style.display = "none";
                     }
 
-                    // Display the user-uploaded image after processing
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        carImage.src = e.target.result;
-                    };
-                    reader.readAsDataURL(fileInput.files[0]);
+                    // Display the user-uploaded image after processing using Blob URL
+                    carImage.src = URL.createObjectURL(fileInput.files[0]);
 
                     errorMessage.style.display = "none"; // Clear error message
                 } else {
