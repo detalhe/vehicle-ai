@@ -1,5 +1,26 @@
 {
     "version": 2,
-    "builds": [{"src": "./index.js", "use": "@vercel/node" }],
-    "routes": [{ "src": "/(.*)", "dest": "/" }]
+    "builds": [
+        {
+            "src": "./index.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "Content-Security-Policy",
+                    "value": "default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
+                }
+            ]
+        }
+    ]
 }
