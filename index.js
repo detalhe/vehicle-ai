@@ -85,7 +85,7 @@ const getCarInfo = async (imageBuffer) => {
 
     const parts = [
         {
-            text: `Accurately identify the vehicle model, manufacturer, color, and possible year with your analysis. Please respond in the following JSON format:
+            text: `Accurately identify the vehicle model, manufacturer, color, and year with your analysis. Please respond in the following JSON format:
 
       {
         "vehicle": {

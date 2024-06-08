@@ -85,9 +85,7 @@ runButton.addEventListener("click", function (event) {
                     carYear.textContent = data.carInfo.vehicle.year;
 
                     // Update car make logo
-                    const logoUrl = `https://raw.githubusercontent.com/dangnelson/car-makes-icons/2a7f574ce813e1eeddcca955c87847bc5baa28b6/svgs/${formatCarMakeForLogo(
-                        make
-                    )}.svg`;
+                    const logoUrl = `https://raw.githubusercontent.com/dangnelson/car-makes-icons/2a7f574ce813e1eeddcca955c87847bc5baa28b6/svgs/${formatCarMakeForLogo(make)}.svg`;
                     const logoExists = await checkLogoExists(logoUrl);
                     if (logoExists) {
                         carMakeLogo.src = logoUrl;
