@@ -76,6 +76,8 @@ runButton.addEventListener("click", function (event) {
             .then(async (data) => {
                 if (data.carInfo) {
                     // Update car card with the new data
+                    carImage.src =
+                        "data:image/jpeg;base64," + data.carInfo.imageBase64;
                     const make = data.carInfo.vehicle.manufacturer;
                     carMake.textContent = make;
                     carModel.textContent = data.carInfo.vehicle.model;
@@ -93,9 +95,6 @@ runButton.addEventListener("click", function (event) {
                     } else {
                         carMakeLogo.style.display = "none";
                     }
-
-                    // Display the user-uploaded image after processing using Blob URL
-                    carImage.src = URL.createObjectURL(fileInput.files[0]);
 
                     errorMessage.style.display = "none"; // Clear error message
                 } else {

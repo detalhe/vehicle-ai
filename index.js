@@ -35,6 +35,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
         if (carInfo.error) {
             res.status(400).json({ error: carInfo.error });
         } else {
+            carInfo.imageBase64 = imageBuffer.toString("base64");
             res.json({ carInfo });
         }
     } catch (error) {
