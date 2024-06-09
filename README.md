@@ -3,13 +3,8 @@
 ![Vehicle AI](https://img.shields.io/badge/Vehicle%20AI-v1.0.0-blue)
 ![Node.js](https://img.shields.io/badge/Node.js-20.14.0-brightgreen)
 ![Express](https://img.shields.io/badge/Express-4.19.2-orange)
+![@google/generative-ai](https://img.shields.io/badge/%40google%2Fgenerative--ai-0.12.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![@google/generative-ai](https://img.shields.io/badge/%40google%2Fgenerative--ai-%5E0.12.0-blue)
-![axios](https://img.shields.io/badge/axios-%5E1.7.2-blue)
-![dotenv](https://img.shields.io/badge/dotenv-%5E16.4.5-blue)
-![ejs](https://img.shields.io/badge/ejs-%5E3.1.10-blue)
-![multer](https://img.shields.io/badge/multer-%5E1.4.5--lts.1-blue)
-![uuid](https://img.shields.io/badge/uuid-%5E9.0.1-blue)
 
 ## Table of Contents
 
