@@ -4,7 +4,7 @@
   "description": "Identify vehicles with AI",
   "main": "index.js",
   "engines": {
-    "node": "18.x"
+    "node": "20.14.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
