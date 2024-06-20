@@ -6,7 +6,7 @@
 ![@google/generative-ai](https://img.shields.io/badge/%40google%2Fgenerative--ai-0.12.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-![](https://cdn.discordapp.com/attachments/1012419491180847195/1250809296552198155/gif.gif?ex=666c4a6f&is=666af8ef&hm=e973ec12d95d0a1b1083bc5876b335c443c2b4bad13e6606cb68e9f51f54f3df&)
+![](https://cdn.discordapp.com/attachments/1012419491180847195/1250809296552198155/gif.gif?ex=667584ef&is=6674336f&hm=7344fe5b426cbd93d13c517e3fb0e049af7fe6792dac00fc665426272d167d80&)
 
 ## Table of Contents
 
