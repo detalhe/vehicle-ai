@@ -254,3 +254,30 @@ footer a:hover {
 .car-make-logo:hover {
     transform: scale(1.1);
 }
+
+.drop-zone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px dashed #53ceff;
+    border-radius: 20px;
+    background-color: rgba(83, 207, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    color: #53ceff;
+    z-index: 10;
+}
+
+.drop-text {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #ccc;
+}
+
+.upload-section {
+    position: relative;
+}

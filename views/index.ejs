@@ -45,13 +45,16 @@
     <div class="container">
       <h1>Identify Any Vehicle With AI</h1>
       <p>Upload an image of any vehicle, and our <strong>Advanced AI</strong> will instantly recognize the make, model, and more.</p>
-      <form action="/upload" method="post" enctype="multipart/form-data" class="upload-section">
+      <form action="/upload" method="post" enctype="multipart/form-data" class="upload-section" id="uploadForm">
         <input type="file" name="image" accept="image/*" required style="display: none;" id="fileInput">
         <label for="fileInput" class="upload-button" id="uploadButton">Upload Image</label>
         <button type="submit" class="upload-button" id="runButton" style="display: none;">Run</button>
         <div class="file-info" id="fileInfo" style="display: none;">
-            <span class="file-name" id="fileName"></span>
-            <button type="button" class="remove-button" id="removeButton">X</button>
+          <span class="file-name" id="fileName"></span>
+          <button type="button" class="remove-button" id="removeButton">X</button>
+        </div>
+        <p class="drop-text" id="dropText">or drag and drop your image here</p>
+        <div class="drop-zone" id="dropZone" style="display: none;">
         </div>
       </form>
     </div>

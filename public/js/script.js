@@ -4,6 +4,7 @@ const runButton = document.getElementById("runButton");
 const fileInfo = document.getElementById("fileInfo");
 const fileName = document.getElementById("fileName");
 const removeButton = document.getElementById("removeButton");
+const dropText = document.getElementById("dropText");
 
 const carImage = document.getElementById("carImage");
 const carMake = document.getElementById("carMake");
@@ -14,25 +15,21 @@ const carMakeLogo = document.getElementById("carMakeLogo");
 
 const errorMessage = document.getElementById("errorMessage");
 
-let isRunning = false; // Flag variable
+const dropZone = document.getElementById('dropZone');
+const uploadForm = document.getElementById('uploadForm');
 
-fileInput.addEventListener("change", function () {
-    if (fileInput.files.length > 0) {
-        uploadButton.style.display = "none";
-        runButton.style.display = "inline-block";
-        fileInfo.style.display = "flex";
-        fileName.textContent =
-            fileInput.files[0].name.slice(0, 20) +
-            (fileInput.files[0].name.length > 20 ? "..." : "");
-        errorMessage.style.display = "none"; // Clear error message
-    }
-});
+let isRunning = false; // Flag variable
+let dragCounter = 0;
+let dragTimer;
+
+fileInput.addEventListener("change", updateFileInfo);
 
 removeButton.addEventListener("click", function () {
     fileInput.value = "";
     uploadButton.style.display = "inline-block";
     runButton.style.display = "none";
     fileInfo.style.display = "none";
+    dropText.style.display = "block"; // Show the drop text again
     isRunning = false; // Reset the flag when removing the file
     errorMessage.style.display = "none"; // Clear error message
 });
@@ -119,6 +116,7 @@ function resetUploadForm() {
     uploadButton.style.display = "inline-block";
     runButton.style.display = "none";
     fileInfo.style.display = "none";
+    dropText.style.display = "block"; // Show the drop text again
     runButton.textContent = "Run";
     runButton.classList.remove("generating");
     isRunning = false;
@@ -132,5 +130,69 @@ function scrollToDetails() {
         // Fallback for older browsers
         const top = element.getBoundingClientRect().top + window.pageYOffset;
         window.scrollTo({ top, behavior: "smooth" });
+    }
+}
+
+function showDropZone() {
+    clearTimeout(dragTimer);
+    dropZone.style.display = 'flex';
+}
+
+function hideDropZone() {
+    dragTimer = setTimeout(() => {
+        dropZone.style.display = 'none';
+    }, 100); // Small delay to prevent flashing
+}
+
+document.body.addEventListener('dragenter', function(e) {
+    dragCounter++;
+    showDropZone();
+});
+
+document.body.addEventListener('dragleave', function(e) {
+    dragCounter--;
+    if (dragCounter === 0) {
+        hideDropZone();
+    }
+});
+
+document.body.addEventListener('drop', function(e) {
+    e.preventDefault();
+    dragCounter = 0;
+    hideDropZone();
+});
+
+dropZone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    showDropZone();
+});
+
+dropZone.addEventListener('drop', handleDrop);
+
+function handleDrop(e) {
+    e.preventDefault();
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    handleFiles(files);
+    hideDropZone();
+}
+
+function handleFiles(files) {
+    if (files.length) {
+        fileInput.files = files;
+        updateFileInfo();
+        // Trigger the existing change event listener
+        fileInput.dispatchEvent(new Event('change'));
+    }
+}
+
+function updateFileInfo() {
+    if (fileInput.files.length > 0) {
+        uploadButton.style.display = "none";
+        runButton.style.display = "inline-block";
+        fileInfo.style.display = "flex";
+        dropText.style.display = "none"; // Hide the drop text
+        fileName.textContent = fileInput.files[0].name.slice(0, 20) + (fileInput.files[0].name.length > 20 ? "..." : "");
+        errorMessage.style.display = "none";
     }
 }
