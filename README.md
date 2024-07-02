@@ -25,10 +25,12 @@
 
 ## Features
 
-- Upload an image of any vehicle.
+- Upload an image of any vehicle through file selection or drag-and-drop.
 - AI-based identification of vehicle make, model, color, and year.
-- User-friendly interface with real-time feedback.
+- Display of car manufacturer logo (when available).
+- User-friendly interface with animations.
 - Error handling and informative messages for users.
+- Responsive design for various screen sizes.
 
 ## Installation
 
@@ -118,6 +120,11 @@ Contributions are welcome! To contribute:
 4. Commit your changes (`git commit -m 'Add some feature'`).
 5. Push to the branch (`git push origin feature-branch`).
 6. Open a pull request.
+
+## Acknowledgments
+
+- Thanks to [Dan Nelson](https://github.com/dangnelson) for the [car-makes-icons](https://github.com/dangnelson/car-makes-icons) repository, which provides the car manufacturer logos used in this project.
+
 
 ## License
 
