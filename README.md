@@ -21,16 +21,15 @@
 
 ## Introduction
 
-**Vehicle AI** is a web application that leverages Generative AI using the Google Gemini Pro model to identify vehicles from uploaded images. It can recognize the make, model, color, and year of the vehicle in the image.
+**Vehicle AI** is a web app that uses Generative AI to identify any vehicle. Utilizing Google's Gemini model, it can detect a vehicle's make, model, color, and year from an image.
 
 ## Features
 
-- Upload an image of any vehicle through file selection or drag-and-drop.
+- Image upload through file selection or drag-and-drop.
 - AI-based identification of vehicle make, model, color, and year.
 - Display of car manufacturer logo (when available).
 - User-friendly interface with animations.
-- Error handling and informative messages for users.
-- Responsive design for various screen sizes.
+- Responsive design.
 
 ## Installation
 
@@ -48,10 +47,11 @@ To get started with Vehicle AI, follow these steps:
     ```
 
 3. **Set up environment variables:**
-    Create a `.env` file in the root directory and add your Google API key:
-    ```env
-    GOOGLE_API_KEY=your_google_api_key
-    ```
+   Create a `.env` file in the root directory and add your Google Gemini API key:
+   ```
+   GOOGLE_API_KEY=your_google_api_key
+   ```
+   To get an API key, visit [ai.google.dev](https://ai.google.dev) and follow the instructions to create a project and generate a key.
 
 4. **Run the application:**
     ```bash
