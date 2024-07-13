@@ -18,7 +18,7 @@ const errorMessage = document.getElementById("errorMessage");
 const dropZone = document.getElementById('dropZone');
 const uploadForm = document.getElementById('uploadForm');
 
-let isRunning = false; // Flag variable
+let isRunning = false;
 let dragCounter = 0;
 let dragTimer;
 
@@ -29,9 +29,9 @@ removeButton.addEventListener("click", function () {
     uploadButton.style.display = "inline-block";
     runButton.style.display = "none";
     fileInfo.style.display = "none";
-    dropText.style.display = "block"; // Show the drop text again
-    isRunning = false; // Reset the flag when removing the file
-    errorMessage.style.display = "none"; // Clear error message
+    dropText.style.display = "block";
+    isRunning = false;
+    errorMessage.style.display = "none";
 });
 
 function formatCarMakeForLogo(make) {
@@ -72,19 +72,14 @@ runButton.addEventListener("click", function (event) {
             })
             .then(async (data) => {
                 if (data.carInfo) {
-                    // Update car card with the new data
-                    carImage.src =
-                        "data:image/jpeg;base64," + data.carInfo.imageBase64;
+                    carImage.src = "data:image/jpeg;base64," + data.carInfo.imageBase64;
                     const make = data.carInfo.vehicle.manufacturer;
                     carMake.textContent = make;
                     carModel.textContent = data.carInfo.vehicle.model;
                     carColor.textContent = data.carInfo.vehicle.color;
                     carYear.textContent = data.carInfo.vehicle.year;
 
-                    // Update car make logo
-                    const logoUrl = `https://raw.githubusercontent.com/dangnelson/car-makes-icons/2a7f574ce813e1eeddcca955c87847bc5baa28b6/svgs/${formatCarMakeForLogo(
-                        make
-                    )}.svg`;
+                    const logoUrl = `https://raw.githubusercontent.com/dangnelson/car-makes-icons/2a7f574ce813e1eeddcca955c87847bc5baa28b6/svgs/${formatCarMakeForLogo(make)}.svg`;
                     const logoExists = await checkLogoExists(logoUrl);
                     if (logoExists) {
                         carMakeLogo.src = logoUrl;
@@ -93,9 +88,8 @@ runButton.addEventListener("click", function (event) {
                         carMakeLogo.style.display = "none";
                     }
 
-                    errorMessage.style.display = "none"; // Clear error message
+                    errorMessage.style.display = "none";
                 } else {
-                    // Handle unexpected response format
                     throw new Error("Unexpected response from the server.");
                 }
                 resetUploadForm();
@@ -103,8 +97,8 @@ runButton.addEventListener("click", function (event) {
             })
             .catch((error) => {
                 console.error("Error:", error);
-                errorMessage.textContent = error.message; // Display error message
-                errorMessage.style.display = "block"; // Show error message
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = "block";
                 resetUploadForm();
                 scrollToDetails();
             });
@@ -116,7 +110,7 @@ function resetUploadForm() {
     uploadButton.style.display = "inline-block";
     runButton.style.display = "none";
     fileInfo.style.display = "none";
-    dropText.style.display = "block"; // Show the drop text again
+    dropText.style.display = "block";
     runButton.textContent = "Run";
     runButton.classList.remove("generating");
     isRunning = false;
@@ -127,7 +121,6 @@ function scrollToDetails() {
     if (element.scrollIntoView) {
         element.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
-        // Fallback for older browsers
         const top = element.getBoundingClientRect().top + window.pageYOffset;
         window.scrollTo({ top, behavior: "smooth" });
     }
@@ -136,12 +129,21 @@ function scrollToDetails() {
 function showDropZone() {
     clearTimeout(dragTimer);
     dropZone.style.display = 'flex';
+    document.getElementById('dropHereText').style.display = 'block';
+    uploadButton.style.display = 'none';
+    runButton.style.display = 'none';
+    dropText.style.display = 'none';
+    fileInfo.style.display = 'none';
 }
 
 function hideDropZone() {
-    dragTimer = setTimeout(() => {
-        dropZone.style.display = 'none';
-    }, 100); // Small delay to prevent flashing
+    dropZone.style.display = 'none';
+    document.getElementById('dropHereText').style.display = 'none';
+    uploadButton.style.display = 'inline-block';
+    dropText.style.display = 'block';
+    if (fileInput.files.length > 0) {
+        fileInfo.style.display = 'flex';
+    }
 }
 
 document.body.addEventListener('dragenter', function(e) {
@@ -171,18 +173,31 @@ dropZone.addEventListener('drop', handleDrop);
 
 function handleDrop(e) {
     e.preventDefault();
+    e.stopPropagation();
     const dt = e.dataTransfer;
     const files = dt.files;
     handleFiles(files);
-    hideDropZone();
+    dragCounter = 0;
+    return false;
 }
 
 function handleFiles(files) {
     if (files.length) {
         fileInput.files = files;
-        updateFileInfo();
-        // Trigger the existing change event listener
-        fileInput.dispatchEvent(new Event('change'));
+        
+        uploadButton.style.display = "none";
+        dropText.style.display = "none";
+        dropZone.style.display = "none";
+        document.getElementById('dropHereText').style.display = "none";
+        
+        runButton.style.display = "inline-block";
+        fileInfo.style.display = "flex";
+        
+        fileName.textContent = fileInput.files[0].name.slice(0, 20) + (fileInput.files[0].name.length > 20 ? "..." : "");
+        
+        errorMessage.style.display = "none";
+        
+        isRunning = false;
     }
 }
 
@@ -191,8 +206,18 @@ function updateFileInfo() {
         uploadButton.style.display = "none";
         runButton.style.display = "inline-block";
         fileInfo.style.display = "flex";
-        dropText.style.display = "none"; // Hide the drop text
+        dropText.style.display = "none";
         fileName.textContent = fileInput.files[0].name.slice(0, 20) + (fileInput.files[0].name.length > 20 ? "..." : "");
         errorMessage.style.display = "none";
     }
 }
+
+document.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}, false);
+
+document.addEventListener('drop', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}, false);
