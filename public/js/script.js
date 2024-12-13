@@ -1,3 +1,25 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('donationModal');
+    const closeButton = document.getElementById('closeButton');
+    
+    modal.style.display = 'block';
+    
+    let timeLeft = 5;
+    const timer = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            closeButton.classList.add('active');
+            closeButton.textContent = 'Close';
+            closeButton.onclick = function() {
+                modal.style.display = 'none';
+            };
+        } else {
+            closeButton.textContent = `Wait ${timeLeft}s`;
+            timeLeft--;
+        }
+    }, 1000);
+});
+
 const fileInput = document.getElementById("fileInput");
 const uploadButton = document.getElementById("uploadButton");
 const runButton = document.getElementById("runButton");
